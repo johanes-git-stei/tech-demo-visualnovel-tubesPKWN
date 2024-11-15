@@ -5,6 +5,11 @@
 define Furina = Character("Furina", color="#4f82bb")
 define Raiden = Character("Raiden Ei", color="#37316d")
 define FurRai = Character("Furina & Raiden", color="#435b94")
+define narrator = Character("Random Narrator", color="#44ad49")
+
+# variable definition
+default furina_point = 0
+default raiden_point = 0
 
 # The game starts here.
 
@@ -58,7 +63,7 @@ label background_sprite:
         blur 20
 
     # raiden default
-    Raiden "baik! pertama mari kita bahas mengenai background dan sprite image!"
+    Raiden "baik! mari kita bahas mengenai background dan sprite image!"
     # Furina confused
     Furina "Hm... apa itu background dan sprite, Raiden?"
     Raiden "Nah background adalah latar belakang yang muncul dalam suatu scene dalam visual novel!"
@@ -113,8 +118,88 @@ label background_sprite:
     Raiden "last but not least, sprite expresi default atau biasa sering digunakan jika karakter memiliki emosi netral."
     # Furina default
     Furina "Wow... jadi background dan sprite itu penting ya, Raiden?"
-    Raiden "sangat!"
+    Raiden "Benar, terutama jika kamu ingin visual novelmu memiliki latar dan karakter yang unik!"
 
     # This ends the game.
+
+label transisi:
+    # Furina default, Raiden default
+    Raiden "Kali ini, kita akan bahas mengenai transisi~"
+    Furina "Transisi memiliki banyak fungsi dalam visual novel, terutama pada pergantian scene dan posisi karakter!"
+    Raiden "Benar sekali, Furina! Coba jelaskan transisi apa saja yang dapat kita gunakan dalam visual novel!"
+    Furina "cih nyuruh-nyuruh kowe..."
+    Raiden "..."
+    Furina "..."
+    # Raiden furious, Furina annoyed
+    Raiden "無我の境地へ。"
+    Furina "BAIK! Transisi pertama yang ingin aku bahas transisi dalam scene!"
+    # change bg scene
+    Furina "Scene seperti yang ada dibelakang kita sebenernya dapat diubah kapan saja dan kita menggunakan transisi untuk membuat perubahan scene menjadi lebih halus!"
+    # change bg scene
+    Furina "Transisi scene dapat digunakan sebagai cara yang kreatif..."
+    # change bg scene, Raiden confused
+    Furina "...untuk memperlihatkan perubahan suasana atau waktu..."
+    # change bg scene
+    Furina "...dalam cerita atau visual novel!"
+    # reset bg scene, Raiden default
+    Furina "Selanjutnya adalah tansisi dalam karakter atau biasa disebut sprite!"
+    Furina "Transisi sprite digunakan untuk mengubah posisi karakter atau mengeluarkan karakter dari scene!"
+    Furina "misalnya..."
+    # Furina dissolved away
+    Furina "Dissolved"
+    Furina "Fade"
+    Furina "move"
+    Furina "pixelated"
+    Furina "atau bahkan animasi khusus..."
+    # Furina spinning animation
+    Furina "seperti ini!"
+    Raiden "..."
+    Raiden "Baik... sekian dari kami mengenai transisi!"
+    # Furina still spinning
+    Raiden "Ingat [player_name], transisi dapat digunakan untuk membuat scene dan karaktermu menjadi lebih hidup!"
+    # scene fade in, Furina still spinning
+
+label multiple_choice_ending:
+    #furina default, Raiden default
+    Furina "Mari kita bahas salah satu aspek paling penting dalam suatu visual novel..."
+    Raiden "Multiple ending choice!"
+    Furina "Seperti yang kita tahu, multiple ending choice adalah pilihan yang diberikan kepada pemain..."
+    Furina "..untuk memilih ending yang diinginkan berdasarkan aksinya di suatu visual novel!"
+    Raiden "Untuk mendapatkan ending tertentu, perlu dilakukan aksi-aksi spesifik seperti memiliki cukup in-game currency, berinteraksi dengan karakter utama lainnya atau bahkan menemukan Easter Egg untuk mendapatkan secret ending!"
+    Raiden "Mari kita mulai dengan contoh sederhana, [player_name]!"
+    Furina "Mari kita mulai dengan scenario sederhana!"
+
+    # ganti scene fade in / out
+    Narrator "dalam scenario ini, kamu diberi 3 ending:"
+    Narrator "1. Ending bersama Furina"
+    Narrator "2. Ending bersama Raiden"
+    Narrator "3. Ending netral"
+    Narrator "Ending-ending ini dapat didapatkan berdasarkan pilihan mu dibawah ini!"
+    Narrator "Pilihanmu adalah..."
+    Narrator "1. Hangout bersama Furina"
+    Narrator "2. Hangout bersama Raiden"
+    Narrator "3. Tidak hangout sama sekali"
+    Narrator "Pilihan ini akan diulang 4 kali, jumlah total kamu hangout dengan karakter ini akan menentukan endingnya"
+    Narrator "Semakin sering hangout maka semakin besar kemungkinan kamu mendapatkan ending bersama karakter tersebut!"
+    Narrator "Are you ready, [player_name]?"
+    Narrator "let's start!"
+
+    menu:
+        "Hangout bersama Furina":
+            $ furina_point += 1
+            jump multiple_choice_ending
+
+        "Hangout bersama Raiden":
+            $ raiden_point += 1
+            jump multiple_choice_ending
+
+        "Tidak hangout sama sekali":
+            jump multiple_choice_ending
+
+
+label music:
+
+label minigame:
+
 
     return
