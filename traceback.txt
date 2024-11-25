@@ -1,28 +1,30 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "renpy/common/00start.rpy", line 279, in script
-    python:
-ScriptError: could not find label 'start'.
+  File "game/script.rpy", line 93, in script
+    hide furina_happy with Fade
+Exception: Expected transition to return a displayable, not a <partial <function Fade at 0x00000000038270d0> () {'old_widget': <renpy.display.layout.Fixed object at 0x0000000004fd2c40>, 'new_widget': <renpy.display.layout.Fixed object at 0x000000000f81ca00>}>
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "C:\renpy-8.3.2-sdk\renpy\bootstrap.py", line 359, in bootstrap
-    renpy.main.main()
-  File "C:\renpy-8.3.2-sdk\renpy\main.py", line 652, in main
-    run(restart)
-  File "C:\renpy-8.3.2-sdk\renpy\main.py", line 148, in run
-    renpy.execution.run_context(True)
-  File "C:\renpy-8.3.2-sdk\renpy\execution.py", line 958, in run_context
-    context.run()
-  File "renpy/common/00start.rpy", line 279, in script
-    python:
-  File "C:\renpy-8.3.2-sdk\renpy\script.py", line 1103, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'start'.
+  File "game/script.rpy", line 93, in script
+    hide furina_happy with Fade
+  File "C:\renpy-8.3.2-sdk\renpy\ast.py", line 1361, in execute
+    renpy.exports.with_statement(trans, paired=paired)
+  File "C:\renpy-8.3.2-sdk\renpy\exports\statementexports.py", line 257, in with_statement
+    return renpy.game.interface.do_with(trans, paired, clear=clear)
+  File "C:\renpy-8.3.2-sdk\renpy\display\core.py", line 1578, in do_with
+    return self.interact(trans_pause=True,
+  File "C:\renpy-8.3.2-sdk\renpy\display\core.py", line 2215, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "C:\renpy-8.3.2-sdk\renpy\display\core.py", line 2666, in interact_core
+    trans = instantiate_transition(None, old_root, layers_root)
+  File "C:\renpy-8.3.2-sdk\renpy\display\core.py", line 2580, in instantiate_transition
+    raise Exception("Expected transition to return a displayable, not a {!r}".format(trans))
+Exception: Expected transition to return a displayable, not a <partial <function Fade at 0x00000000038270d0> () {'old_widget': <renpy.display.layout.Fixed object at 0x0000000004fd2c40>, 'new_widget': <renpy.display.layout.Fixed object at 0x000000000f81ca00>}>
 
 Windows-10-10.0.22631 AMD64
 Ren'Py 8.3.2.24090902
 Tech Demo 1.0
-Thu Nov 14 17:47:17 2024
+Mon Nov 25 21:00:37 2024

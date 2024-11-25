@@ -1,15 +1,19 @@
 ﻿# The script of the game goes in this file.
 
 # Character definition and image
-
 define Furina = Character("Furina", color="#4f82bb")
 define Raiden = Character("Raiden Ei", color="#37316d")
 define FurRai = Character("Furina & Raiden", color="#435b94")
-define narrator = Character("Random Narrator", color="#44ad49")
+define Narrator = Character("Random Narrator", color="#44ad49")
+
+# Position and short, reusable animations definition
+define furina_def_pos = Position(xalign=0.1, yalign=0.58)
+define raiden_def_pos = Position(xalign=0.9, yalign=0.58)
 
 # variable definition
 default furina_point = 0
 default raiden_point = 0
+default countdown = 4
 
 # The game starts here.
 
@@ -27,6 +31,8 @@ label start:
     # directory.
 
     show furina_default at Position(xalign=0.5, yalign=0.61)
+    with dissolve
+
 
     # These display lines of dialogue.
 
@@ -34,93 +40,163 @@ label start:
     Furina "Halo semuanya!"
     Furina "It is I! Furina!"
     # raiden default center, furina left
-    Raiden "...dan aku Raiden Ei."
+    show furina_default at furina_def_pos
+    with moveinright
+    show raiden_default at Position(xalign=0.5, yalign=0.61)
+    with dissolve
+    Raiden "...dan aku Raiden Ei." 
     # raiden right
-    Furina "Disini kita akan memperkenalkan kalian mengenai RenPy!"
-    Raiden "Bagaimana cara gameplay RenPy berjalan pada dasarnya"
-    Furina "tentang background dan sprite image, transisi..."
+    show raiden_default at raiden_def_pos    
+    with moveinleft
+    Furina "Disini kita akan memperkenalkan kalian mengenai RenPy!" 
+    Raiden "Bagaimana cara gameplay RenPy berjalan pada dasarnya.." 
+    Furina "tentang background dan sprite image, transisi..." 
     # raiden happy
-    Raiden "...minigames dan multiple ending choice!"
+    hide raiden_default
+    show raiden_happy at raiden_def_pos
+    Raiden "...minigames dan multiple ending choice!" 
     # raiden default
-    Raiden "Nah sebelum kita mulai..."
-    Raiden "boleh tahu tidak, namamu siapa?"
+    hide raiden_happy
+    show raiden_default at raiden_def_pos
+    Raiden "Nah sebelum kita mulai..." 
+    Raiden "boleh tahu tidak, namamu siapa?" 
     
     # pemain memasukkan namanya, nama default dari MC adalah Rusdi.
     $ player_name = renpy.input("Masukkan nama yang ingin anda gunakan:", default="Rusdi")
     $ player_name = player_name.strip()
 
+    if player_name == "":
+        $ player_name = "Rusdi"
+
+
     # Furina happy, Raiden happy
-    Furina "Halo, [player_name]!"
-    Raiden "Senang bertemu dengan anda, [player_name].."
+    hide furina_default
+    show furina_happy at furina_def_pos
+    Furina "Halo, [player_name]!" 
+    hide raiden_default
+    show raiden_happy at raiden_def_pos
+    Raiden "Senang bertemu dengan anda, [player_name].." 
 
     # Furina default, Raiden default
-    Furina "Mari kita..."
+    hide furina_happy
+    show furina_default at furina_def_pos
+    hide raiden_happy
+    show raiden_default at raiden_def_pos
+    Furina "Mari kita..." 
     # Furina happy, Raiden happy
+    hide furina_default
+    show furina_happy at furina_def_pos
+    hide raiden_default
+    show raiden_happy at raiden_def_pos
     FurRai "Mulai!"
 
 label background_sprite:
-    scene bg_sunkencourt with dissolve:
+    scene bg_sunkencourt with fade:
         blur 20
 
     # raiden default
+    show furina_default at furina_def_pos
+    show raiden_default at raiden_def_pos
     Raiden "baik! mari kita bahas mengenai background dan sprite image!"
     # Furina confused
+    hide furina_default
+    show furina_confused at furina_def_pos
     Furina "Hm... apa itu background dan sprite, Raiden?"
     Raiden "Nah background adalah latar belakang yang muncul dalam suatu scene dalam visual novel!"
+    hide furina_confused
+    show furina_default at furina_def_pos
     Raiden "..seperti gambar yang ada di belakang ini!"
     Raiden "[player_name], kamu kenal nggak dengan tempat di belakang kita?"
 
     menu:
         "hm.. Sunken Court, nggak sih?":
             # Raiden happy
+            hide raiden_default
+            show raiden_happy at raiden_def_pos
             Raiden "benar! ini adalah Sunken Court!"
+            hide raiden_happy
+            show raiden_default at raiden_def_pos
 
         "aku lupa, Raiden...":
             # Raiden sad
+            hide raiden_default
+            show raiden_sad at raiden_def_pos
             Raiden "Yah, rupanya kamu kurang perhatian terhadap lingkunganmu, [player_name].."
             # Raiden default
+            hide raiden_sad
+            show raiden_default at raiden_def_pos
             Raiden "ini adalah sunken court ya!"
     
     Raiden "Mari kita lanjut!"
     Raiden "Background bisa digunakan untuk menentukan setting cerita, suasana, dan waktu!"
     Raiden "pastikan background yang digunakan memiliki resolusi yang bagus dan aspek rasio yang sesuai dengan visual novelmu"
     # Furina confused
+    hide furina_default
+    show furina_confused at furina_def_pos
     Furina "seperti 1920 x 1080?"
     # Raiden happy
+    hide raiden_default
+    show raiden_happy at raiden_def_pos
     Raiden "benar, Furina!"
+    hide furina_confused
+    show furina_default at furina_def_pos
     # Raiden default
+    hide raiden_happy
+    show raiden_default at raiden_def_pos
     Raiden "selanjutnya adalah sprite!"
     Raiden "Kamu tahu tidak, apa itu sprite, Furina?"
     Furina "hmm, apa itu Raiden?"
     Raiden "Sprite adalah karakter yang muncul dalam visual novel!"
     Raiden "atau singkatnya, sprite adalah avatar dari masing-masing karakter dalam visual novel tersebut."
     # Furina confused
+    hide furina_default
+    show furina_annoyed at furina_def_pos
     Furina "s- seperti kita berdua?!"
     Raiden "benar, Furina!"
     # Furina annoyed
+    hide furina_annoyed
+    show furina_confused at furina_def_pos
     Furina "damn..."
+    hide raiden_default
+    show raiden_sad at raiden_def_pos
     Raiden "..."
     Furina "..."
     Raiden "..."
+    hide raiden_sad
+    show raiden_default at raiden_def_pos
     Raiden "Anyway..."
+    hide furina_confused
+    show furina_default at furina_def_pos
     Raiden "sprite juga bisa digunakan untuk menunjukkan emosi dari karakter tersebut!"
     Raiden "contohnya.."
     # Furina confused
+    hide furina_default
+    show furina_confused at furina_def_pos
     # Raiden happy
+    hide raiden_default
+    show raiden_happy at raiden_def_pos
     Raiden "Sprite ekspresi happy"
     # Raiden sad
-    Raiden "Sprite ekspresi sad"
+    hide raiden_happy
+    show raiden_sad at raiden_def_pos
+    Raiden "Sprite ekspresi sad atau sedih"
     # Raiden confused
-    Raiden "Sprite ekspresi confused"
+    hide raiden_sad
+    show raiden_confused at raiden_def_pos
+    Raiden "Sprite ekspresi confused atau kebingungan"
     # Raiden annoyed
+    hide raiden_confused
+    show raiden_annoyed at raiden_def_pos
     Raiden "Sprite ekspresi annoyed"
     # Raiden default
+    hide raiden_annoyed
+    show raiden_default at raiden_def_pos
     Raiden "last but not least, sprite expresi default atau biasa sering digunakan jika karakter memiliki emosi netral."
     # Furina default
+    hide furina_confused
+    show furina_default at furina_def_pos
     Furina "Wow... jadi background dan sprite itu penting ya, Raiden?"
     Raiden "Benar, terutama jika kamu ingin visual novelmu memiliki latar dan karakter yang unik!"
-
-    # This ends the game.
 
 label transisi:
     # Furina default, Raiden default
@@ -131,7 +207,7 @@ label transisi:
     Raiden "..."
     Furina "..."
     # Raiden furious, Furina annoyed
-    Raiden "無我の境地へ。"
+    Raiden "tak keplak rai kowe-"
     Furina "BAIK! Transisi pertama yang ingin aku bahas transisi dalam scene!"
     # change bg scene
     Furina "Scene seperti yang ada dibelakang kita sebenernya dapat diubah kapan saja dan kita menggunakan transisi untuk membuat perubahan scene menjadi lebih halus!"
@@ -184,20 +260,54 @@ label multiple_choice_ending:
     Narrator "Are you ready, [player_name]?"
     Narrator "let's start!"
 
-    menu:
-        "Hangout bersama Furina":
-            $ furina_point += 1
-            jump multiple_choice_ending
 
-        "Hangout bersama Raiden":
-            $ raiden_point += 1
-            jump multiple_choice_ending
+    while countdown != 0:
+        Narrator "Sisa kesempatan hangout: [countdown]\nTotal hangout bersama Furina: [furina_point]\nTotal hangout bersama Raiden: [raiden_point]"
+        menu:
+            "Hangout bersama Furina":
+                $ furina_point += 1
+                $ countdown -= 1
 
-        "Tidak hangout sama sekali":
-            jump multiple_choice_ending
+            "Hangout bersama Raiden":
+                $ raiden_point += 1
+                $ countdown -= 1
+
+            "Tidak hangout sama sekali":
+                $ countdown -= 1
+                pass
+    
+if furina_point > raiden_point:
+    label furina_ending:
+        Narrator "Congratulation! Akhirnya kamu pergi berlibur ke Prancis bersama Furina\nTotal hangout bersama Furina: [furina_point]!"
+
+elif raiden_point > furina_point:
+    label raiden_ending:
+        Narrator "Congratulation! Akhirnya kamu pergi berlibur ke Jepang bersama Raiden!\nTotal hangout bersama Raiden: [raiden_point]"
+
+else:
+    label neutral_ending:
+        Narrator "sayangnya kamu tidak berlibur sama sekali... mungkin lain kali ya, [player_name]?"
 
 
 label music:
+    Raiden "Suatu visual novel atau game tidak akan lengkap tanpa adanya musik!"
+    Furina "Musik dapat digunakan untuk menambahkan emosi dalam scene atau memberikan kesan yang lebih mendalam pada pemain!"
+    Furina "Musik dapat digunakan untuk mengidentifikasikan suatu suasana atau perasaan bahkan karakter tertentu!"
+    Raiden "Ada beberapa jenis musik yang dapat digunakan dalam visual novel, seperti..."
+    Raiden "Musik netral atau bisa dianggap sebagai background music..."
+    Furina "Background music biasanya didesain untuk menemani scene atau cerita dalam visual novel!"
+    Raiden "selanjutnya ada musik sedih atau sad music..."
+    Furina "Sad music biasanya digunakan untuk scene yang menyedihkan atau mengharukan..."
+    Raiden "Kemudian ada musik happy!"
+    Furina "Happy music biasanya digunakan untuk scene yang ceria atau menyenangkan!"
+    Raiden "Sebenarnya ada banyak bentuk musik tergantung suasana dan cerita yang ingin kamu buat!"
+    Raiden "Namun ada satu musik yang lumayan unik tidak hanya untuk scene tapi juga untuk minigame!"
+    Raiden "contohnya musik battle"
+    Furina "Musik battle biasanya digunakan untuk scene pertarungan atau minigame!"
+    Furina "...dan didesain untuk menambahkan ketegangan dan semangat dalam scene tersebut!"
+    Raiden "Jadi, jangan lupa untuk memilih musik yang tepat untuk scene dan ceritamu, [player_name]!"
+
+
 
 label minigame:
 
