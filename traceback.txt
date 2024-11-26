@@ -1,30 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 93, in script
-    hide furina_happy with Fade
-Exception: Expected transition to return a displayable, not a <partial <function Fade at 0x00000000038270d0> () {'old_widget': <renpy.display.layout.Fixed object at 0x0000000004fd2c40>, 'new_widget': <renpy.display.layout.Fixed object at 0x000000000f81ca00>}>
+  File "game/script.rpy", line 257, in script
+    with easein
+  File "game/script.rpy", line 257, in <module>
+    with easein
+NameError: name 'easein' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 93, in script
-    hide furina_happy with Fade
-  File "C:\renpy-8.3.2-sdk\renpy\ast.py", line 1361, in execute
-    renpy.exports.with_statement(trans, paired=paired)
-  File "C:\renpy-8.3.2-sdk\renpy\exports\statementexports.py", line 257, in with_statement
-    return renpy.game.interface.do_with(trans, paired, clear=clear)
-  File "C:\renpy-8.3.2-sdk\renpy\display\core.py", line 1578, in do_with
-    return self.interact(trans_pause=True,
-  File "C:\renpy-8.3.2-sdk\renpy\display\core.py", line 2215, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "C:\renpy-8.3.2-sdk\renpy\display\core.py", line 2666, in interact_core
-    trans = instantiate_transition(None, old_root, layers_root)
-  File "C:\renpy-8.3.2-sdk\renpy\display\core.py", line 2580, in instantiate_transition
-    raise Exception("Expected transition to return a displayable, not a {!r}".format(trans))
-Exception: Expected transition to return a displayable, not a <partial <function Fade at 0x00000000038270d0> () {'old_widget': <renpy.display.layout.Fixed object at 0x0000000004fd2c40>, 'new_widget': <renpy.display.layout.Fixed object at 0x000000000f81ca00>}>
+  File "game/script.rpy", line 257, in script
+    with easein
+  File "C:\renpy-8.3.2-sdk\renpy\ast.py", line 1354, in execute
+    trans = renpy.python.py_eval(self.expr)
+  File "C:\renpy-8.3.2-sdk\renpy\python.py", line 1209, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "C:\renpy-8.3.2-sdk\renpy\python.py", line 1202, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/script.rpy", line 257, in <module>
+    with easein
+NameError: name 'easein' is not defined
 
 Windows-10-10.0.22631 AMD64
 Ren'Py 8.3.2.24090902
 Tech Demo 1.0
-Mon Nov 25 21:00:37 2024
+Tue Nov 26 12:42:52 2024

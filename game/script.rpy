@@ -199,53 +199,150 @@ label background_sprite:
     Raiden "Benar, terutama jika kamu ingin visual novelmu memiliki latar dan karakter yang unik!"
 
 label transisi:
+    scene bg_campuscenter with fade:
+        blur 20
+
     # Furina default, Raiden default
+    show furina_default at furina_def_pos
+    with dissolve
+    show raiden_default at raiden_def_pos
+    with dissolve
     Raiden "Kali ini, kita akan bahas mengenai transisi~"
     Furina "Transisi memiliki banyak fungsi dalam visual novel, terutama pada pergantian scene dan posisi karakter!"
     Raiden "Benar sekali, Furina! Coba jelaskan transisi apa saja yang dapat kita gunakan dalam visual novel!"
+    # Furina annoyed
+    hide furina_default
+    show furina_annoyed at furina_def_pos
     Furina "cih nyuruh-nyuruh kowe..."
     Raiden "..."
     Furina "..."
-    # Raiden furious, Furina annoyed
+    # Raiden furious, Furina happy
+    hide raiden_default
+    show raiden_furious at raiden_def_pos
     Raiden "tak keplak rai kowe-"
+    hide furina_annoyed
+    show furina_happy at furina_def_pos
     Furina "BAIK! Transisi pertama yang ingin aku bahas transisi dalam scene!"
     # change bg scene
+    scene bg_its with pixellate:
+        blur 20
+    hide bg_campuscenter with dissolve
+
+    show furina_happy at furina_def_pos
+    with dissolve
+    hide raiden_furious
+    show raiden_default at raiden_def_pos
+    with dissolve
     Furina "Scene seperti yang ada dibelakang kita sebenernya dapat diubah kapan saja dan kita menggunakan transisi untuk membuat perubahan scene menjadi lebih halus!"
     # change bg scene
+    scene bg_ui with slideleft:
+        blur 20
+    hide bg_campuscenter with dissolve
+
+    show furina_default at furina_def_pos
+    with dissolve
+    hide raiden_furious
+    show raiden_default at raiden_def_pos
+    with dissolve
     Furina "Transisi scene dapat digunakan sebagai cara yang kreatif..."
     # change bg scene, Raiden confused
+    scene bg_collosaltitan with blinds:
+        blur 10
+    hide bg_ui with dissolve
+
+    show furina_default at furina_def_pos
+    with dissolve
+    hide raiden_default
+    show raiden_confused at raiden_def_pos
+    with hpunch
     Furina "...untuk memperlihatkan perubahan suasana atau waktu..."
     # change bg scene
+    scene bg_minecraft with irisin:
+        blur 10
+    hide bg_collosaltitan with dissolve
+
+    show furina_default at furina_def_pos
+    with dissolve
+    show raiden_confused at raiden_def_pos
+    with dissolve
     Furina "...dalam cerita atau visual novel!"
     # reset bg scene, Raiden default
+    scene bg_campuscenter with irisout:
+        blur 10
+    hide bg_minecraft with dissolve
+
+    show furina_default at furina_def_pos
+    with dissolve
+    show raiden_confused at raiden_def_pos
+    with dissolve
     Furina "Selanjutnya adalah tansisi dalam karakter atau biasa disebut sprite!"
+    
+    hide raiden_confused
+    show raiden_default at raiden_def_pos
     Furina "Transisi sprite digunakan untuk mengubah posisi karakter atau mengeluarkan karakter dari scene!"
     Furina "misalnya..."
     # Furina dissolved away
+    hide furina_default
+    with dissolve
     Furina "Dissolved"
+    show furina_default at furina_def_pos
+    with dissolve
+    hide furina_default
+    with fade
     Furina "Fade"
+    show furina_default at furina_def_pos
+    with dissolve
+    hide furina_default
+    with slideawayleft
     Furina "move"
+    show furina_default at furina_def_pos
+    with dissolve
+    hide furina_default
+    with pixellate
     Furina "pixelated"
     Furina "atau bahkan animasi khusus..."
     # Furina spinning animation
     Furina "seperti ini!"
     Raiden "..."
+    hide raiden_default
+    show raiden_annoyed at raiden_def_pos
+    with dissolve
     Raiden "Baik... sekian dari kami mengenai transisi!"
     # Furina still spinning
+    hide raiden_annoyed
+    show raiden_happy at raiden_def_pos
+    with dissolve
     Raiden "Ingat [player_name], transisi dapat digunakan untuk membuat scene dan karaktermu menjadi lebih hidup!"
     # scene fade in, Furina still spinning
 
 label multiple_choice_ending:
-    #furina default, Raiden default
+    scene bg_senirupa with fade:
+        blur 20
+
+    # Furina default, Raiden default
+    show furina_default at furina_def_pos
+    with dissolve
+    show raiden_default at raiden_def_pos
+    with dissolve
+
     Furina "Mari kita bahas salah satu aspek paling penting dalam suatu visual novel..."
+    hide raiden_default
+    show raiden_happy at raiden_def_pos
     Raiden "Multiple ending choice!"
     Furina "Seperti yang kita tahu, multiple ending choice adalah pilihan yang diberikan kepada pemain..."
+    hide raiden_happy
+    show raiden_default at raiden_def_pos
     Furina "..untuk memilih ending yang diinginkan berdasarkan aksinya di suatu visual novel!"
     Raiden "Untuk mendapatkan ending tertentu, perlu dilakukan aksi-aksi spesifik seperti memiliki cukup in-game currency, berinteraksi dengan karakter utama lainnya atau bahkan menemukan Easter Egg untuk mendapatkan secret ending!"
+    hide furina_default
+    show furina_happy at furina_def_pos
     Raiden "Mari kita mulai dengan contoh sederhana, [player_name]!"
-    Furina "Mari kita mulai dengan scenario sederhana!"
 
     # ganti scene fade in / out
+    scene bg_classroom with irisout:
+        blur 10
+    hide bg_senirupa with dissolve
+
     Narrator "dalam scenario ini, kamu diberi 3 ending:"
     Narrator "1. Ending bersama Furina"
     Narrator "2. Ending bersama Raiden"
