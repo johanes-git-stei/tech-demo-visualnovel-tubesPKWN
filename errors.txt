@@ -2,13 +2,21 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 10: invalid syntax
-    at Position(xalign=0.1, yalign=0.58)
-        ^
+File "game/script.rpy", line 413: scene statement expects a non-empty block.
+    scene bg_france with blinds:
+                                ^
 
-File "game/script.rpy", line 11: invalid syntax
-    at Position(xalign=0.9, yalign=0.58)
-        ^
+File "game/script.rpy", line 414: expected statement.
+    blur 10
+           ^
+
+File "game/script.rpy", line 424: scene statement expects a non-empty block.
+    scene bg_japan with blinds:
+                               ^
+
+File "game/script.rpy", line 425: expected statement.
+    blur 10
+           ^
 
 Ren'Py Version: Ren'Py 8.3.2.24090902
-Mon Nov 25 20:50:16 2024
+Wed Nov 27 10:23:19 2024

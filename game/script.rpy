@@ -90,6 +90,38 @@ label start:
     show raiden_happy at raiden_def_pos
     FurRai "Mulai!"
 
+label tutorial_menu:
+    hide furina_happy
+    hide raiden_happy
+    
+    scene bg_breeze with dissolve:
+        blur 25
+
+    show random_narrator at Position(xalign=0.5, yalign=0.61)
+    with dissolve
+    Narrator "Silahkan pilih tutorial yang ingin kamu pelajari, [player_name]!"
+    hide random_narrator
+    menu:
+        "Background dan sprite":
+            jump background_sprite
+        "Transisi":
+            jump transisi
+        "Multiple ending choice dan menu":
+            jump multiple_choice_ending
+        "music":
+            jump music
+        "selesaikan tutorial":
+            show random_narrator at Position(xalign=0.5, yalign=0.61)
+            with dissolve
+            Narrator "apakah kamu yakin ingin menyelesaikan tutorial ini?"
+            hide random_narrator
+            menu:
+                "Ya":
+                    return
+                "Tidak":
+                    jump tutorial_menu
+        
+
 label background_sprite:
     scene bg_sunkencourt with fade:
         blur 20
@@ -198,6 +230,8 @@ label background_sprite:
     Furina "Wow... jadi background dan sprite itu penting ya, Raiden?"
     Raiden "Benar, terutama jika kamu ingin visual novelmu memiliki latar dan karakter yang unik!"
 
+    jump tutorial_menu
+
 label transisi:
     scene bg_campuscenter with fade:
         blur 20
@@ -246,7 +280,7 @@ label transisi:
     with dissolve
     Furina "Transisi scene dapat digunakan sebagai cara yang kreatif..."
     # change bg scene, Raiden confused
-    scene bg_collosaltitan with blinds:
+    scene bg_collosaltitan with squares:
         blur 10
     hide bg_ui with dissolve
 
@@ -300,8 +334,15 @@ label transisi:
     hide furina_default
     with pixellate
     Furina "pixelated"
+    show furina_default at furina_def_pos
+    with dissolve
     Furina "atau bahkan animasi khusus..."
     # Furina spinning animation
+    image spinning_character:
+        "furina_happy.png"
+        rotate 0        # Start at 0 degrees
+        linear 0.5 rotate 360   # Complete one full rotation (360 degrees) in 2 seconds
+        repeat
     Furina "seperti ini!"
     Raiden "..."
     hide raiden_default
@@ -314,6 +355,8 @@ label transisi:
     with dissolve
     Raiden "Ingat [player_name], transisi dapat digunakan untuk membuat scene dan karaktermu menjadi lebih hidup!"
     # scene fade in, Furina still spinning
+
+    jump tutorial_menu
 
 label multiple_choice_ending:
     scene bg_senirupa with fade:
@@ -341,8 +384,10 @@ label multiple_choice_ending:
     # ganti scene fade in / out
     scene bg_classroom with irisout:
         blur 10
-    hide bg_senirupa with dissolve
+    hide bg_senirupa
 
+    show random_narrator at Position(xalign=0.5, yalign=0.61)
+    with dissolve
     Narrator "dalam scenario ini, kamu diberi 3 ending:"
     Narrator "1. Ending bersama Furina"
     Narrator "2. Ending bersama Raiden"
@@ -356,10 +401,14 @@ label multiple_choice_ending:
     Narrator "Semakin sering hangout maka semakin besar kemungkinan kamu mendapatkan ending bersama karakter tersebut!"
     Narrator "Are you ready, [player_name]?"
     Narrator "let's start!"
+    hide random_narrator
 
 
     while countdown != 0:
+        show random_narrator at Position(xalign=0.5, yalign=0.61)
+        with dissolve
         Narrator "Sisa kesempatan hangout: [countdown]\nTotal hangout bersama Furina: [furina_point]\nTotal hangout bersama Raiden: [raiden_point]"
+        hide random_narrator
         menu:
             "Hangout bersama Furina":
                 $ furina_point += 1
@@ -375,38 +424,94 @@ label multiple_choice_ending:
     
 if furina_point > raiden_point:
     label furina_ending:
+        scene bg_france with squares:
+            blur 10
+        hide bg_classroom
+        show furina_happy at Position(xalign=0.5, yalign=0.61)
+        with dissolve
         Narrator "Congratulation! Akhirnya kamu pergi berlibur ke Prancis bersama Furina\nTotal hangout bersama Furina: [furina_point]!"
+
+        jump tutorial_menu
 
 elif raiden_point > furina_point:
     label raiden_ending:
+        scene bg_japan with squares:
+            blur 10
+        hide bg_classroom
+        show raiden_happy at Position(xalign=0.5, yalign=0.61)
+        with dissolve
         Narrator "Congratulation! Akhirnya kamu pergi berlibur ke Jepang bersama Raiden!\nTotal hangout bersama Raiden: [raiden_point]"
+
+        jump tutorial_menu
 
 else:
     label neutral_ending:
         Narrator "sayangnya kamu tidak berlibur sama sekali... mungkin lain kali ya, [player_name]?"
 
+        jump tutorial_menu
+
 
 label music:
+    scene bg_recordingstudio with fade:
+        blur 20
+
+    show furina_default at furina_def_pos
+    with dissolve
+    show raiden_default at raiden_def_pos
+    with dissolve
+
+    # Raiden default, Furina default
+    show furina_default at furina_def_pos
+    with dissolve
+    show raiden_default at raiden_def_pos
+    with dissolve
     Raiden "Suatu visual novel atau game tidak akan lengkap tanpa adanya musik!"
+    # Furina Happy
+    hide furina_default
+    show furina_happy at furina_def_pos
     Furina "Musik dapat digunakan untuk menambahkan emosi dalam scene atau memberikan kesan yang lebih mendalam pada pemain!"
     Furina "Musik dapat digunakan untuk mengidentifikasikan suatu suasana atau perasaan bahkan karakter tertentu!"
+    # Furina default, Raiden happy
+    hide furina_happy
+    show furina_default at furina_def_pos
+    hide raiden_default
+    show raiden_happy at raiden_def_pos
     Raiden "Ada beberapa jenis musik yang dapat digunakan dalam visual novel, seperti..."
+    play music "haggstrom.mp3" volume 0.5
     Raiden "Musik netral atau bisa dianggap sebagai background music..."
     Furina "Background music biasanya didesain untuk menemani scene atau cerita dalam visual novel!"
+    stop music
+    # Furina sad, raiden default
+    hide raiden_happy
+    show raiden_default at raiden_def_pos
+    hide furina_default
+    show furina_sad at furina_def_pos
+    play music "fallendown.mp3" fadein 1.0 volume 0.5
     Raiden "selanjutnya ada musik sedih atau sad music..."
     Furina "Sad music biasanya digunakan untuk scene yang menyedihkan atau mengharukan..."
+    stop music
+    # Furina happy
+    hide furina_sad
+    show furina_happy at furina_def_pos
+    play music "forgetmenot.mp3" fadein 1.0 volume 0.5
     Raiden "Kemudian ada musik happy!"
     Furina "Happy music biasanya digunakan untuk scene yang ceria atau menyenangkan!"
     Raiden "Sebenarnya ada banyak bentuk musik tergantung suasana dan cerita yang ingin kamu buat!"
+    stop music
     Raiden "Namun ada satu musik yang lumayan unik tidak hanya untuk scene tapi juga untuk minigame!"
+    # Furina annoyed
+    hide furina_happy
+    show furina_annoyed at furina_def_pos
+    play music "megalovania.mp3" fadein 1.0 volume 0.5
     Raiden "contohnya musik battle"
     Furina "Musik battle biasanya digunakan untuk scene pertarungan atau minigame!"
     Furina "...dan didesain untuk menambahkan ketegangan dan semangat dalam scene tersebut!"
+    stop music
+    # Furina happy, Raiden happy
+    hide furina_happy
+    show furina_annoyed at furina_def_pos
+    hide raiden_default
+    show raiden_happy at raiden_def_pos
     Raiden "Jadi, jangan lupa untuk memilih musik yang tepat untuk scene dan ceritamu, [player_name]!"
 
-
-
-label minigame:
-
-
-    return
+    jump tutorial_menu
