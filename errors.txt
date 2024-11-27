@@ -1,0 +1,22 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/script.rpy", line 413: scene statement expects a non-empty block.
+    scene bg_france with blinds:
+                                ^
+
+File "game/script.rpy", line 414: expected statement.
+    blur 10
+           ^
+
+File "game/script.rpy", line 424: scene statement expects a non-empty block.
+    scene bg_japan with blinds:
+                               ^
+
+File "game/script.rpy", line 425: expected statement.
+    blur 10
+           ^
+
+Ren'Py Version: Ren'Py 8.3.2.24090902
+Wed Nov 27 10:23:19 2024
